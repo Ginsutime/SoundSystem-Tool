@@ -9,6 +9,17 @@ namespace SoundSystem
         MusicPlayer musicPlayer;
         public const int MaxLayerCount = 3;
 
+        float volume = 1;
+        public float Volume
+        {
+            get => volume;
+            private set
+            {
+                value = Mathf.Clamp(value, 0, 1);
+                volume = value;
+            }
+        }
+
         private static MusicManager instance;
         public static MusicManager Instance
         {
