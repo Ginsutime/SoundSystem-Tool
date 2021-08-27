@@ -76,12 +76,36 @@ namespace SoundSystem
             {
                 for (int i = 0; i < layerSources.Count; i++)
                 {
-                    startVolume = sourceStartVolumes[i];
-                    newVolume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / fadeTime);
-                    layerSources[i].volume = newVolume;
+                    // If active layer, fade to target
+                    if (i <= MusicManager.Instance.ActiveLayerIndex)
+                    {
+                        startVolume = sourceStartVolumes[i];
+                        newVolume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / fadeTime);
+                        layerSources[i].volume = newVolume;
+                    }
+                    // Fades to 0 from current volume if not
+                    else
+                    {
+                        startVolume = sourceStartVolumes[i];
+                        newVolume = Mathf.Lerp(startVolume, 0, elapsedTime / fadeTime);
+                        layerSources[i].volume = newVolume;
+                    }
                 }
 
                 yield return null;
+            }
+
+            // If we get this far, set to target for accuracy - whole # instead of decimals
+            for (int i = 0; i < layerSources.Count; i++)
+            {
+                if (i <= MusicManager.Instance.ActiveLayerIndex)
+                {
+                    layerSources[i].volume = targetVolume;
+                }
+                else
+                {
+                    layerSources[i].volume = 0;
+                }
             }
         }
 

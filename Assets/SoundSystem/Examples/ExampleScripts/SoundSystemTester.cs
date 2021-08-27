@@ -18,5 +18,13 @@ public class SoundSystemTester : MonoBehaviour
         {
             songB.Play(2.5f);
         }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MusicManager.Instance.DecreaseLayerIndex(5);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MusicManager.Instance.IncreaseLayerIndex(5);
+        }
     }
 }
