@@ -9,7 +9,9 @@ namespace SoundSystem
         List<AudioSource> layerSources = new List<AudioSource>();
         List<float> sourceStartVolumes = new List<float>();
         MusicEvent _musicEvent = null;
+
         Coroutine fadeVolumeRoutine = null;
+        Coroutine stopRoutine = null;
 
         private void Awake()
         {
@@ -43,6 +45,7 @@ namespace SoundSystem
             {
                 if (musicEvent.MusicLayers[i] != null)
                 {
+                    // If content is in music layer, assign it
                     layerSources[i].volume = 0;
                     layerSources[i].clip = musicEvent.MusicLayers[i];
                     layerSources[i].outputAudioMixerGroup = musicEvent.Mixer;
@@ -53,8 +56,41 @@ namespace SoundSystem
             FadeVolume(MusicManager.Instance.Volume, fadeTime);
         }
 
+        public void Stop(float fadeTime)
+        {
+            if (stopRoutine != null)
+                StopCoroutine(stopRoutine);
+            stopRoutine = StartCoroutine(StopRoutine(fadeTime));
+        }
+
+        IEnumerator StopRoutine(float fadeTime)
+        {
+            // Cancels current running volume fades
+            if (fadeVolumeRoutine != null)
+                StopCoroutine(fadeVolumeRoutine);
+
+            // Blends volume to 0 depending on layer type
+            if (_musicEvent.LayerType == LayerType.Additive)
+            {
+                fadeVolumeRoutine = StartCoroutine(LerpSourceAdditiveRoutine(0, fadeTime));
+            }
+            else if (_musicEvent.LayerType == LayerType.Single)
+            {
+                fadeVolumeRoutine = StartCoroutine(LerpSourceSingleRoutine(0, fadeTime));
+            }
+
+            // Waits for blend to finish and then stops audio sources
+            yield return fadeVolumeRoutine;
+
+            foreach(AudioSource source in layerSources)
+            {
+                source.Stop();
+            }
+        }
+
         public void FadeVolume(float targetVolume, float fadeTime)
         {
+            // Animates each audiosource.volume over time
             targetVolume = Mathf.Clamp(targetVolume, 0, 1);
             if (fadeTime < 0) fadeTime = 0;
 

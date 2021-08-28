@@ -67,7 +67,14 @@ namespace SoundSystem
 
         public void PlayMusic(MusicEvent musicEvent, float fadeTime)
         {
+            if (musicEvent == null) return;
+
             musicPlayer.Play(musicEvent, fadeTime);
+        }
+
+        public void StopMusic(float fadeTime)
+        {
+            musicPlayer.Stop(fadeTime);
         }
 
         public void IncreaseLayerIndex(float fadeTime)
