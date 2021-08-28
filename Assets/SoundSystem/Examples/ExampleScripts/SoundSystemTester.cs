@@ -7,6 +7,7 @@ public class SoundSystemTester : MonoBehaviour
 {
     [SerializeField] MusicEvent songA;
     [SerializeField] MusicEvent songB;
+    [SerializeField] MusicEvent songC;
 
     private void Update()
     {
@@ -17,6 +18,10 @@ public class SoundSystemTester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             songB.Play(2.5f);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            songC.Play(2.5f);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {

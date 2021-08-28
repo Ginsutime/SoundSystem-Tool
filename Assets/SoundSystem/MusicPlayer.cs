@@ -30,6 +30,11 @@ namespace SoundSystem
         public void Play(MusicEvent musicEvent, float fadeTime)
         {
             Debug.Log("Play Music");
+            if (musicEvent == null)
+            {
+                Debug.LogWarning("MusicEvent is empty, cannot play.");
+                return;
+            }
 
             _musicEvent = musicEvent;
 
@@ -40,6 +45,7 @@ namespace SoundSystem
                 {
                     layerSources[i].volume = 0;
                     layerSources[i].clip = musicEvent.MusicLayers[i];
+                    layerSources[i].outputAudioMixerGroup = musicEvent.Mixer;
                     layerSources[i].Play();
                 }
             }
@@ -57,11 +63,13 @@ namespace SoundSystem
 
             if (_musicEvent.LayerType == LayerType.Additive)
             {
-                StartCoroutine(LerpSourceAdditiveRoutine(targetVolume, fadeTime));
+                fadeVolumeRoutine = StartCoroutine
+                    (LerpSourceAdditiveRoutine(targetVolume, fadeTime));
             }
             else if (_musicEvent.LayerType == LayerType.Single)
             {
-                StartCoroutine(LerpSourceSingleRoutine());
+                fadeVolumeRoutine = 
+                    StartCoroutine(LerpSourceSingleRoutine(targetVolume, fadeTime));
             }
         }
 
@@ -118,9 +126,48 @@ namespace SoundSystem
             }
         }
 
-        IEnumerator LerpSourceSingleRoutine()
+        IEnumerator LerpSourceSingleRoutine(float targetVolume, float fadeTime)
         {
-            yield return null;
+            SaveSourceStartVolumes();
+
+            float startVolume;
+            float newVolume;
+
+            for (float elapsedTime = 0; elapsedTime <= fadeTime; elapsedTime += Time.deltaTime)
+            {
+                for (int i = 0; i < layerSources.Count; i++)
+                {
+                    // If active layer, blend up
+                    if (i == MusicManager.Instance.ActiveLayerIndex)
+                    {
+                        startVolume = sourceStartVolumes[i];
+                        newVolume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / fadeTime);
+                        layerSources[i].volume = newVolume;
+                    }
+                    // Otherwise blend down inactive layers
+                    else
+                    {
+                        startVolume = sourceStartVolumes[i];
+                        newVolume = Mathf.Lerp(startVolume, 0, elapsedTime / fadeTime);
+                        layerSources[i].volume = newVolume;
+                    }
+                }
+
+                yield return null;
+            }
+
+            // If we get this far, set to target for accuracy - whole # instead of decimals
+            for (int i = 0; i < layerSources.Count; i++)
+            {
+                if (i == MusicManager.Instance.ActiveLayerIndex)
+                {
+                    layerSources[i].volume = targetVolume;
+                }
+                else
+                {
+                    layerSources[i].volume = 0;
+                }
+            }
         }
     }
 }
