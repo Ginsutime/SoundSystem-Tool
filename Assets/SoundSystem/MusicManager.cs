@@ -9,7 +9,18 @@ namespace SoundSystem
         int activeLayerIndex = 0;
         public int ActiveLayerIndex => activeLayerIndex;
 
-        MusicPlayer musicPlayer;
+        // Around 3:30 of Video 12 explains basics of how to do object pooling instead if need be
+        // This only works for 2 Music Players, no more
+        MusicPlayer musicPlayer1;
+        MusicPlayer musicPlayer2;
+
+        bool isMusicPlayer1Playing = false;
+
+        public MusicPlayer ActivePlayer => (isMusicPlayer1Playing) ? musicPlayer1 : musicPlayer2;
+        public MusicPlayer InactivePlayer => (isMusicPlayer1Playing) ? musicPlayer2 : musicPlayer1;
+
+        MusicEvent activeMusicEvent;
+
         public const int MaxLayerCount = 3;
 
         float volume = 1;
@@ -60,21 +71,39 @@ namespace SoundSystem
             SetupMusicPlayers();
         }
 
+        // 8:50 of Video 12 explains more object pooling stuff
         void SetupMusicPlayers()
         {
-            musicPlayer = gameObject.AddComponent<MusicPlayer>();
+            musicPlayer1 = gameObject.AddComponent<MusicPlayer>();
+            musicPlayer2 = gameObject.AddComponent<MusicPlayer>();
         }
 
         public void PlayMusic(MusicEvent musicEvent, float fadeTime)
         {
+            // If empty, returns
             if (musicEvent == null) return;
+            // If passing something already playing, returns
+            if (musicEvent == activeMusicEvent) return;
 
-            musicPlayer.Play(musicEvent, fadeTime);
+            if (activeMusicEvent != null)
+                ActivePlayer.Stop(fadeTime);
+
+            activeMusicEvent = musicEvent;
+
+            // 12:40ish of Video 12 object pooling mentioned
+            // Toggles the state of the boolean
+            isMusicPlayer1Playing = !isMusicPlayer1Playing;
+
+            ActivePlayer.Play(musicEvent, fadeTime);
         }
 
         public void StopMusic(float fadeTime)
         {
-            musicPlayer.Stop(fadeTime);
+            if (activeMusicEvent == null)
+                return;
+
+            activeMusicEvent = null;
+            ActivePlayer.Stop(fadeTime);
         }
 
         public void IncreaseLayerIndex(float fadeTime)
@@ -88,7 +117,7 @@ namespace SoundSystem
                 return;
 
             activeLayerIndex = newLayerIndex;
-            musicPlayer.FadeVolume(Volume, fadeTime);
+            ActivePlayer.FadeVolume(Volume, fadeTime);
         }
 
         public void DecreaseLayerIndex(float fadeTime)
@@ -100,7 +129,7 @@ namespace SoundSystem
                 return;
 
             activeLayerIndex = newLayerIndex;
-            musicPlayer.FadeVolume(Volume, fadeTime);
+            ActivePlayer.FadeVolume(Volume, fadeTime);
         }
     }
 }
