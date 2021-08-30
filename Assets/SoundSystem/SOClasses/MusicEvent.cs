@@ -14,8 +14,14 @@ namespace SoundSystem
     [CreateAssetMenu(menuName = "SoundSystem/MusicEvent", fileName = "MUS_")]
     public class MusicEvent : ScriptableObject
     {
-        [SerializeField] AudioClip[] musicLayers;
+        [Header("General Settings")]
+        [SerializeField] AudioClip[] musicLayers = null;
+
+        [Tooltip("Additive = Layers Added Together, " +
+            "Single = Layers Play Independently")]
+        [Space(15)]
         [SerializeField] LayerType layerType = LayerType.Additive;
+        [Space(15)]
         [SerializeField] AudioMixerGroup mixer;
 
         public AudioClip[] MusicLayers => musicLayers;
@@ -24,6 +30,12 @@ namespace SoundSystem
 
         public void Play(float fadeTime)
         {
+            if (musicLayers == null)
+            {
+                Debug.LogWarning("MusicEvent.Play(): No music clip specified!");
+                return;
+            }
+
             MusicManager.Instance.PlayMusic(this, fadeTime);
         }
     }

@@ -131,5 +131,22 @@ namespace SoundSystem
             activeLayerIndex = newLayerIndex;
             ActivePlayer.FadeVolume(Volume, fadeTime);
         }
+
+        public void SetVolume(float newVolume, float fadeTime)
+        {
+            Volume = newVolume;
+            ActivePlayer.FadeVolume(Volume, fadeTime);
+        }
+
+        public void SetLayerIndex(int newLayerIndex, float fadeTime)
+        {
+            newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
+
+            if (newLayerIndex == activeLayerIndex)
+                return;
+
+            activeLayerIndex = newLayerIndex;
+            SetVolume(Volume, fadeTime);
+        }
     }
 }

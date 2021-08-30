@@ -31,7 +31,6 @@ namespace SoundSystem
 
         public void Play(MusicEvent musicEvent, float fadeTime)
         {
-            Debug.Log("Play Music");
             if (musicEvent == null)
             {
                 Debug.LogWarning("MusicEvent is empty, cannot play.");
@@ -90,6 +89,8 @@ namespace SoundSystem
 
         public void FadeVolume(float targetVolume, float fadeTime)
         {
+            if (_musicEvent == null) return;
+
             // Animates each audiosource.volume over time
             targetVolume = Mathf.Clamp(targetVolume, 0, 1);
             if (fadeTime < 0) fadeTime = 0;
