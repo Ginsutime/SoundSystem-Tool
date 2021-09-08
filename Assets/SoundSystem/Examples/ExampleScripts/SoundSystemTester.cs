@@ -9,6 +9,9 @@ public class SoundSystemTester : MonoBehaviour
     [SerializeField] MusicEvent songB;
     [SerializeField] MusicEvent songC;
 
+    [SerializeField] SFXOneShot soundA;
+    [SerializeField] SFXLoop soundB;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -22,6 +25,14 @@ public class SoundSystemTester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             songC.Play(2.5f);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            soundA.PlayOneShot(transform.position);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            soundB.Play(transform.position);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {

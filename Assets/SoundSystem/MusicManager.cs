@@ -9,8 +9,6 @@ namespace SoundSystem
         int activeLayerIndex = 0;
         public int ActiveLayerIndex => activeLayerIndex;
 
-        // Around 3:30 of Video 12 explains basics of how to do object pooling instead if need be
-        // This only works for 2 Music Players, no more
         MusicPlayer musicPlayer1;
         MusicPlayer musicPlayer2;
 
@@ -71,7 +69,6 @@ namespace SoundSystem
             SetupMusicPlayers();
         }
 
-        // 8:50 of Video 12 explains more object pooling stuff
         void SetupMusicPlayers()
         {
             musicPlayer1 = gameObject.AddComponent<MusicPlayer>();
@@ -90,7 +87,6 @@ namespace SoundSystem
 
             activeMusicEvent = musicEvent;
 
-            // 12:40ish of Video 12 object pooling mentioned
             // Toggles the state of the boolean
             isMusicPlayer1Playing = !isMusicPlayer1Playing;
 

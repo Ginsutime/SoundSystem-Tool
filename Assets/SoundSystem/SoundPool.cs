@@ -9,19 +9,25 @@ namespace SoundSystem
         Transform _parent;
 
         private Queue<AudioSource> pool = new Queue<AudioSource>();
+        private Queue<AudioSource> pool2 = new Queue<AudioSource>();
 
-        public SoundPool(Transform parent, int startSize)
+        public SoundPool(Transform parent, int startSize, int startSizeLoop)
         {
             _parent = parent;
 
-            CreateInitialPool(startSize);
+            CreateInitialPool(startSize, startSizeLoop);
         }
 
-        void CreateInitialPool(int startingPoolSize)
+        void CreateInitialPool(int startingOneShotPoolSize, int startingLoopPoolSize)
         {
-            for (int i = 0; i < startingPoolSize; i++)
+            for (int i = 0; i < startingOneShotPoolSize; i++)
             {
                 CreatePoolObject();
+            }
+
+            for (int i = 0; i < startingLoopPoolSize; i++)
+            {
+                CreateLoopPoolObject();
             }
         }
 
@@ -40,7 +46,7 @@ namespace SoundSystem
 
         public void Return(AudioSource objectToReturn)
         {
-            objectToReturn.gameObject.SetActive(true);
+            objectToReturn.gameObject.SetActive(false);
             pool.Enqueue(objectToReturn);
         }
 
@@ -52,6 +58,35 @@ namespace SoundSystem
             newGameObject.transform.SetParent(_parent);
             newGameObject.gameObject.SetActive(false);
             pool.Enqueue(newSource);
+        }
+
+        public AudioSource GetLoop()
+        {
+            if (pool2.Count == 0)
+            {
+                CreateLoopPoolObject();
+            }
+
+            AudioSource objectFromPool = pool2.Dequeue();
+            objectFromPool.gameObject.SetActive(true);
+
+            return objectFromPool;
+        }
+
+        public void ReturnLoop(AudioSource objectToReturn)
+        {
+            objectToReturn.gameObject.SetActive(false);
+            pool2.Enqueue(objectToReturn);
+        }
+
+        private void CreateLoopPoolObject()
+        {
+            GameObject newGameObject = new GameObject("SoundSourceLoop");
+            AudioSource newSource = newGameObject.AddComponent<AudioSource>();
+
+            newGameObject.transform.SetParent(_parent);
+            newGameObject.gameObject.SetActive(false);
+            pool2.Enqueue(newSource);
         }
     }
 }
