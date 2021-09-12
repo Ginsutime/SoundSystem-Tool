@@ -7,13 +7,17 @@ namespace SoundSystem
     public class SoundPool
     {
         Transform _parent;
+        Transform _childOneShot;
+        Transform _childLoop;
 
         private Queue<AudioSource> pool = new Queue<AudioSource>();
         private Queue<AudioSource> pool2 = new Queue<AudioSource>();
 
-        public SoundPool(Transform parent, int startSize, int startSizeLoop)
+        public SoundPool(Transform parent, Transform childOS, Transform childLoop, int startSize, int startSizeLoop)
         {
             _parent = parent;
+            _childOneShot = childOS;
+            _childLoop = childLoop;
 
             CreateInitialPool(startSize, startSizeLoop);
         }
@@ -55,7 +59,7 @@ namespace SoundSystem
             GameObject newGameObject = new GameObject("SoundSource");
             AudioSource newSource = newGameObject.AddComponent<AudioSource>();
 
-            newGameObject.transform.SetParent(_parent);
+            newGameObject.transform.SetParent(_childOneShot);
             newGameObject.gameObject.SetActive(false);
             pool.Enqueue(newSource);
         }
@@ -84,7 +88,7 @@ namespace SoundSystem
             GameObject newGameObject = new GameObject("SoundSourceLoop");
             AudioSource newSource = newGameObject.AddComponent<AudioSource>();
 
-            newGameObject.transform.SetParent(_parent);
+            newGameObject.transform.SetParent(_childLoop);
             newGameObject.gameObject.SetActive(false);
             pool2.Enqueue(newSource);
         }

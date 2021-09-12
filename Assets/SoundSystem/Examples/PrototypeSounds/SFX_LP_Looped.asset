@@ -17,8 +17,8 @@ MonoBehaviour:
   mixer: {fileID: 7985440589190720279, guid: 912046e26eeea324e9ef77180fede387, type: 2}
   priority: 128
   volume:
-    MinValue: 0.18650308
-    MaxValue: 0.84461796
+    MinValue: 0.12595837
+    MaxValue: 0.7840733
   pitch:
     MinValue: 0.43689343
     MaxValue: 1.7861962

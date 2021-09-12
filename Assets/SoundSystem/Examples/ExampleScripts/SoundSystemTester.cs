@@ -16,15 +16,15 @@ public class SoundSystemTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            songA.Play(2.5f);
+            songA.Play();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            songB.Play(2.5f);
+            songB.Play();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            songC.Play(2.5f);
+            songC.Play();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {

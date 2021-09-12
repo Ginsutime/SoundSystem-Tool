@@ -18,3 +18,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3cc6f316e24edf543a2fdf0fa062e6f1, type: 3}
   layerType: 1
   mixer: {fileID: 2279021463718446593, guid: 912046e26eeea324e9ef77180fede387, type: 2}
+  initialFadeInTime: 0
+  crossfadeTime: 0
+  layerIncreaseFadeInTime: 0
+  layerDecreaseFadeInTime: 0
+  stopSongFadeOutTime: 0

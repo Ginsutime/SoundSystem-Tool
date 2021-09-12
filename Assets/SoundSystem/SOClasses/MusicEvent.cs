@@ -28,7 +28,19 @@ namespace SoundSystem
         public LayerType LayerType => layerType;
         public AudioMixerGroup Mixer => mixer;
 
-        public void Play(float fadeTime)
+        [SerializeField] float initialFadeInTime = 0;
+        [SerializeField] float crossfadeTime = 0;
+        [SerializeField] float layerIncreaseFadeInTime = 0;
+        [SerializeField] float layerDecreaseFadeInTime = 0;
+        [SerializeField] float stopSongFadeOutTime = 0;
+
+        public float InitialFadeInTime => initialFadeInTime;
+        public float CrossfadeTime => crossfadeTime;
+        public float LayerIncreaseFadeInTime => layerIncreaseFadeInTime;
+        public float LayerDecreaseFadeInTime => layerDecreaseFadeInTime;
+        public float StopSongFadeOutTime => stopSongFadeOutTime;
+
+        public void Play()
         {
             if (musicLayers == null)
             {
@@ -36,7 +48,7 @@ namespace SoundSystem
                 return;
             }
 
-            MusicManager.Instance.PlayMusic(this, fadeTime);
+            MusicManager.Instance.PlayMusic(this, CrossfadeTime);
         }
     }
 }

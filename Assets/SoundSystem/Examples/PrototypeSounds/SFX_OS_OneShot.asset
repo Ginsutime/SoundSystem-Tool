@@ -22,8 +22,8 @@ MonoBehaviour:
     MinValue: 1
     MaxValue: 1
   pitch:
-    MinValue: 1.7861962
-    MaxValue: 1.7861962
+    MinValue: 0.29134718
+    MaxValue: 1.6056956
   stereoPan: 0
   spatialBlend: 0
   attenuationMin: 1

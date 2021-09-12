@@ -75,22 +75,34 @@ namespace SoundSystem
             musicPlayer2 = gameObject.AddComponent<MusicPlayer>();
         }
 
-        public void PlayMusic(MusicEvent musicEvent, float fadeTime)
+        public void PlayMusic(MusicEvent musicEvent, float crossFadeTime)
         {
             // If empty, returns
             if (musicEvent == null) return;
             // If passing something already playing, returns
             if (musicEvent == activeMusicEvent) return;
 
+            // If music player already playing, uses crossFadeTime
             if (activeMusicEvent != null)
-                ActivePlayer.Stop(fadeTime);
+            {
+                ActivePlayer.Stop(crossFadeTime);
 
-            activeMusicEvent = musicEvent;
+                activeMusicEvent = musicEvent;
 
-            // Toggles the state of the boolean
-            isMusicPlayer1Playing = !isMusicPlayer1Playing;
+                // Toggles the state of the boolean
+                isMusicPlayer1Playing = !isMusicPlayer1Playing;
 
-            ActivePlayer.Play(musicEvent, fadeTime);
+                ActivePlayer.Play(musicEvent, crossFadeTime);
+            }
+            // If first time music player is playing, uses initial fadein time
+            else
+            {
+                activeMusicEvent = musicEvent;
+
+                // Toggles the state of the boolean
+                isMusicPlayer1Playing = !isMusicPlayer1Playing;
+                ActivePlayer.Play(musicEvent, activeMusicEvent.InitialFadeInTime);
+            }
         }
 
         public void StopMusic(float fadeTime)

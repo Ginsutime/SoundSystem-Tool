@@ -49,7 +49,13 @@ namespace SoundSystem
 
         void Initialize()
         {
-            soundPools = new SoundPool(this.transform, startingOneShotPoolSize, startingLoopPoolSize);
+            GameObject sfxOneShotOrganizerGO = new GameObject("SFXManager_OneShots");
+            sfxOneShotOrganizerGO.transform.SetParent(this.transform);
+            GameObject sfxLoopOrganizerGO = new GameObject("SFXManager_Loops");
+            sfxLoopOrganizerGO.transform.SetParent(this.transform);
+
+            soundPools = new SoundPool(this.transform, sfxOneShotOrganizerGO.transform, sfxLoopOrganizerGO.transform,
+                startingOneShotPoolSize, startingLoopPoolSize);
         }
         
         public void PlayOneShot(SFXOneShot soundEvent, Vector3 soundPosition)
