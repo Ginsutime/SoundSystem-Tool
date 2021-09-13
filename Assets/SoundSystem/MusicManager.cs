@@ -44,7 +44,7 @@ namespace SoundSystem
 
                     if (instance == null)
                     {
-                        GameObject singletonGO = new GameObject("MusicManager_singleton");
+                        GameObject singletonGO = new GameObject("MusicManager");
                         instance = singletonGO.AddComponent<MusicManager>();
 
                         DontDestroyOnLoad(singletonGO);

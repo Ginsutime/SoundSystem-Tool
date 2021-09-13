@@ -22,7 +22,7 @@ namespace SoundSystem
 
                     if (instance == null)
                     {
-                        GameObject singletonGO = new GameObject("SFXManager_singleton");
+                        GameObject singletonGO = new GameObject("SFXManager");
                         instance = singletonGO.AddComponent<SFXManager>();
 
                         DontDestroyOnLoad(singletonGO);
