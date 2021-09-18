@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Add functionality to looping that allows it to 
+// either be infinite or only run for x amount of cycles.
+// Add anything needed to SFXLoop, not here
 namespace SoundSystem
 {
     public class SFXManager : MonoBehaviour

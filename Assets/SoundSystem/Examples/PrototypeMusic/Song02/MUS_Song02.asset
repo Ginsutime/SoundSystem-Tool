@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 85d7c7a2a70157b41a8bb98f72e95052, type: 3}
   layerType: 0
   mixer: {fileID: 2279021463718446593, guid: 912046e26eeea324e9ef77180fede387, type: 2}
+  tempVolume: 0.847
   initialFadeInTime: 100
   crossfadeTime: 5
   layerIncreaseFadeInTime: 0

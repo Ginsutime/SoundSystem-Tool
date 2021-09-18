@@ -7,6 +7,10 @@ namespace SoundSystem
     [CreateAssetMenu(menuName = "SoundSystem/SFX Looped", fileName = "SFX_LP_")]
     public class SFXLoop : SFXEvent
     {
+        [Header("Test")]
+        public int NumCycles = 0;
+        public bool isLoopedInfinitely;
+
         public void Play(Vector3 position)
         {
             SetVariationValues();

@@ -21,14 +21,13 @@ namespace SoundSystem
 
         public const int MaxLayerCount = 3;
 
-        float volume = 1;
+        // Remove if no longer needed -> float volume => activeMusicEvent.TempVolume;
         public float Volume
         {
-            get => volume;
+            get => activeMusicEvent.TempVolume;
             private set
             {
-                value = Mathf.Clamp(value, 0, 1);
-                volume = value;
+                Mathf.Clamp(activeMusicEvent.TempVolume, 0, 1);
             }
         }
 
@@ -120,6 +119,10 @@ namespace SoundSystem
             int newLayerIndex = activeLayerIndex + 1;
             newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
 
+            // Are these needed?
+            if (activeMusicEvent == null)
+                return;
+
             // Trying to increase it but already at max leads to this
             if (newLayerIndex == activeLayerIndex)
                 return;
@@ -132,6 +135,10 @@ namespace SoundSystem
         {
             int newLayerIndex = activeLayerIndex - 1;
             newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
+
+            // Are these needed?
+            if (activeMusicEvent == null)
+                return;
 
             if (newLayerIndex == activeLayerIndex)
                 return;
@@ -149,6 +156,10 @@ namespace SoundSystem
         public void SetLayerIndex(int newLayerIndex, float fadeTime)
         {
             newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
+
+            // Are these needed?
+            if (activeMusicEvent == null)
+                return;
 
             if (newLayerIndex == activeLayerIndex)
                 return;

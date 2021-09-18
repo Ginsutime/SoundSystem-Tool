@@ -10,7 +10,7 @@ namespace SoundSystem
         [Header("General Settings (Subject to Change)")]
         [SerializeField] AudioClip[] possibleClips = new AudioClip[0];
         [SerializeField] AudioMixerGroup mixer = null;
-        [Space]
+        [Space(15)]
 
         [Range(0, 128)][SerializeField] 
         int priority = 128;

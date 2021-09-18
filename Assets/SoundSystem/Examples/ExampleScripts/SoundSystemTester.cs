@@ -46,5 +46,9 @@ public class SoundSystemTester : MonoBehaviour
         {
             MusicManager.Instance.StopMusic(1);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            MusicManager.Instance.SetLayerIndex(3, 5f);
+        }
     }
 }

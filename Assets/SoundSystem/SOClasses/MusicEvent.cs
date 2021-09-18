@@ -28,7 +28,14 @@ namespace SoundSystem
         public LayerType LayerType => layerType;
         public AudioMixerGroup Mixer => mixer;
 
-        [Header("Fade Times (WIP)")]
+        [Header("Temp Volume Control")]
+        [Space(15)]
+        [Range(0, 1)][SerializeField]
+        float tempVolume = 0;
+
+        public float TempVolume => tempVolume;
+
+        [Header("Fade Times (WIP - Add ranges to these)")]
         [Space(15)]
         [SerializeField] float initialFadeInTime = 0;
         [SerializeField] float crossfadeTime = 0;
