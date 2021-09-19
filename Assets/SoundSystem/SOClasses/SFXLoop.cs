@@ -9,7 +9,8 @@ namespace SoundSystem
     {
         [Header("Test")]
         public int NumCycles = 0;
-        public bool isLoopedInfinitely;
+        public bool IsLoopedInfinitely = true;
+        public bool FiniteLoopingEnabled = false;
 
         public void Play(Vector3 position)
         {

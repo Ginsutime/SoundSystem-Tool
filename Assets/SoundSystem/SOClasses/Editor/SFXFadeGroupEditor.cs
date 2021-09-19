@@ -4,47 +4,48 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
 
-// Values of bool and cycle # don't persist upon hitting play
-// Same serialization problem from last semester
-// Look into solutions, check code you did in test folder before official GBE folder
 [CustomEditor(typeof(SoundSystem.SFXLoop))]
 public class SFXFadeGroupEditor : Editor
 {
-    AnimBool animBool;
-
     private SoundSystem.SFXLoop sfxLoop;
 
-    private int intFieldCycleCount = 0;
+    SerializedProperty numCycleProperty;
+    SerializedProperty enableFiniteLoopingProperty;
 
-    private void OnEnable()
+    void OnEnable()
     {
-        sfxLoop = base.target as SoundSystem.SFXLoop;
-
-        animBool = new AnimBool(false);
-        animBool.valueChanged.AddListener(Repaint);
+        numCycleProperty = serializedObject.FindProperty("NumCycles");
+        enableFiniteLoopingProperty = serializedObject.FindProperty("FiniteLoopingEnabled");
     }
 
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
+
+        sfxLoop = target as SoundSystem.SFXLoop;
+
         base.OnInspectorGUI();
 
         EditorGUILayout.Space(10);
 
         GUILayout.Label("Loop Settings", EditorStyles.boldLabel);
-        animBool.target = EditorGUILayout.ToggleLeft("Enable Finite Looping", animBool.target);
 
-        if (!sfxLoop.isLoopedInfinitely)
+        enableFiniteLoopingProperty.boolValue = 
+            EditorGUILayout.ToggleLeft("Enable Finite Looping", enableFiniteLoopingProperty.boolValue);
+
+        if (enableFiniteLoopingProperty.boolValue == true)
         {
-            if (EditorGUILayout.BeginFadeGroup(animBool.faded))
-            {
-                EditorGUI.indentLevel++;
+            sfxLoop.IsLoopedInfinitely = false;
 
-                intFieldCycleCount = EditorGUILayout.IntField("Loops for # of Cycles", intFieldCycleCount);
-                sfxLoop.NumCycles = intFieldCycleCount;
-
-                EditorGUI.indentLevel--;
-            }
-            EditorGUILayout.EndFadeGroup();
+            numCycleProperty.intValue = 
+                EditorGUILayout.IntField("Loops for # of Cycles", numCycleProperty.intValue);
         }
+        else
+        {
+            numCycleProperty.intValue = 0;
+            sfxLoop.IsLoopedInfinitely = true;
+        }
+
+        serializedObject.ApplyModifiedProperties();
     }
 }
