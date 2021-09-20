@@ -17,15 +17,15 @@ MonoBehaviour:
   mixer: {fileID: 7985440589190720279, guid: 912046e26eeea324e9ef77180fede387, type: 2}
   priority: 128
   volume:
-    MinValue: 0.12595837
-    MaxValue: 0.7840733
+    MinValue: 0.85980284
+    MaxValue: 0.85980284
   pitch:
-    MinValue: 0.43689343
-    MaxValue: 1.7861962
+    MinValue: 1.1237677
+    MaxValue: 1.6166483
   stereoPan: 0
   spatialBlend: 0
   attenuationMin: 1
   attenuationMax: 500
-  NumCycles: 0
-  IsLoopedInfinitely: 1
-  FiniteLoopingEnabled: 0
+  NumCycles: 6
+  IsLoopedInfinitely: 0
+  FiniteLoopingEnabled: 1

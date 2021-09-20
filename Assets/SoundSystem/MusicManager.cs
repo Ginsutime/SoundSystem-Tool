@@ -21,7 +21,6 @@ namespace SoundSystem
 
         public const int MaxLayerCount = 3;
 
-        // Remove if no longer needed -> float volume => activeMusicEvent.TempVolume;
         public float Volume
         {
             get => activeMusicEvent.TempVolume;
