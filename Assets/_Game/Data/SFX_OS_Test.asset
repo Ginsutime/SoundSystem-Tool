@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce999c52b0574b4fa31c3b917ce55c0, type: 3}
+  m_Name: SFX_OS_Test
+  m_EditorClassIdentifier: 
+  possibleClips:
+  - {fileID: 8300000, guid: e3064cde0e5e4f240968794e880f53a8, type: 3}
+  - {fileID: 8300000, guid: f3271d2cdaaaee24796a07b559c9c281, type: 3}
+  - {fileID: 8300000, guid: 9077e90426cd4da46b4a5d805257ef63, type: 3}
+  mixer: {fileID: 7985440589190720279, guid: 912046e26eeea324e9ef77180fede387, type: 2}
+  priority: 128
+  volume:
+    MinValue: 0.8054765
+    MaxValue: 1
+  pitch:
+    MinValue: 0.8952355
+    MaxValue: 1.148576
+  stereoPan: 0
+  spatialBlend: 0
+  attenuationMin: 1
+  attenuationMax: 500

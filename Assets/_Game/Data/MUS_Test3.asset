@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426098ea685cb4e4095268b5815d1072, type: 3}
+  m_Name: MUS_Test3
+  m_EditorClassIdentifier: 
+  musicLayers:
+  - {fileID: 8300000, guid: 001a0db06a80dd446b596aeebf5ba6af, type: 3}
+  - {fileID: 8300000, guid: 3cc6f316e24edf543a2fdf0fa062e6f1, type: 3}
+  - {fileID: 8300000, guid: 70ba6e83ec4135c42a3bf4d319871923, type: 3}
+  layerType: 1
+  mixer: {fileID: 2279021463718446593, guid: 912046e26eeea324e9ef77180fede387, type: 2}
+  masterVolume: 1
+  initialFadeInTime: 5
+  crossfadeTime: 10
+  stopSongFadeOutTime: 10
