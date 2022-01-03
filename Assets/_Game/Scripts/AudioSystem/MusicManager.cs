@@ -119,7 +119,6 @@ namespace AudioSystem
             int newLayerIndex = activeLayerIndex + 1;
             newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
 
-            // Are these needed?
             if (activeMusicEvent == null)
                 return;
 
@@ -144,7 +143,6 @@ namespace AudioSystem
             int newLayerIndex = activeLayerIndex - 1;
             newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
 
-            // Are these needed?
             if (activeMusicEvent == null)
                 return;
 
@@ -165,7 +163,6 @@ namespace AudioSystem
         {
             newLayerIndex = Mathf.Clamp(newLayerIndex, 0, MaxLayerCount - 1);
 
-            // Are these needed?
             if (activeMusicEvent == null)
                 return;
 
