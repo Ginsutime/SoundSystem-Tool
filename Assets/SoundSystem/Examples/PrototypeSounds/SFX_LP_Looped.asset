@@ -26,6 +26,6 @@ MonoBehaviour:
   spatialBlend: 0
   attenuationMin: 1
   attenuationMax: 500
-  NumCycles: 6
+  NumCycles: 0
   IsLoopedInfinitely: 0
   FiniteLoopingEnabled: 1

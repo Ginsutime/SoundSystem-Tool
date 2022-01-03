@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicLayers:
   - {fileID: 8300000, guid: be04f25349bef954ca813714cd71f2ab, type: 3}
-  - {fileID: 8300000, guid: b54878d3eccdee34b9b713cb0f0bf8ed, type: 3}
   - {fileID: 8300000, guid: 0816c1f7c62fc234db840b54bae338bd, type: 3}
+  - {fileID: 8300000, guid: b54878d3eccdee34b9b713cb0f0bf8ed, type: 3}
   layerType: 0
   mixer: {fileID: 2279021463718446593, guid: 912046e26eeea324e9ef77180fede387, type: 2}
   tempVolume: 0.628
-  initialFadeInTime: 1
-  crossfadeTime: 10
-  layerIncreaseFadeInTime: 0
-  layerDecreaseFadeInTime: 0
+  initialFadeInTime: 20
+  crossfadeTime: 20
   stopSongFadeOutTime: 0

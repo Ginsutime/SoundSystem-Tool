@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SoundSystem;
+using UnityEngine.SceneManagement;
 
 public class SoundSystemTester : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class SoundSystemTester : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SceneManager.LoadScene("test");
+        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             songA.Play();

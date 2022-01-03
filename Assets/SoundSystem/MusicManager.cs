@@ -62,6 +62,7 @@ namespace SoundSystem
             else
             {
                 instance = this;
+                DontDestroyOnLoad(instance.gameObject);
             }
 
             SetupMusicPlayers();
@@ -121,6 +122,13 @@ namespace SoundSystem
             // Are these needed?
             if (activeMusicEvent == null)
                 return;
+
+            if (activeMusicEvent.MusicLayers[newLayerIndex] == null)
+            {
+                Debug.LogWarning("MusicEvent.IncreaseLayerIndex(): Reached empty music layer at layer " 
+                    + newLayerIndex + ". Can go no further.");
+                return;
+            }
 
             // Trying to increase it but already at max leads to this
             if (newLayerIndex == activeLayerIndex)
