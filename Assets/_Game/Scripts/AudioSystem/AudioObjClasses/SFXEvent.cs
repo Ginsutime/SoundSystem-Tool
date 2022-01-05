@@ -7,7 +7,7 @@ namespace AudioSystem
 {
     public abstract class SFXEvent : ScriptableObject
     {
-        [Header("General Settings (Subject to Change)")]
+        [Header("General Settings")]
         [SerializeField] AudioClip[] possibleClips = new AudioClip[0];
         [SerializeField] AudioMixerGroup mixer = null;
         [Space(15)]
